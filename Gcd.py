@@ -1,8 +1,9 @@
 import sys
+import random
 
 DEBUG = 0
 
-def gsd(a, b):
+def gcd(a, b):
   """最大公約数を求める
 
   ユークリッドの互除法を用いて、再帰的に最大公約数を求める
@@ -13,7 +14,7 @@ def gsd(a, b):
   """
   # デバッグ出力
   if DEBUG:
-    print("gsd(",a,b,")")
+    print("gcd(",a,b,")")
 
   # 除算値が0の場合
   if(b == 0):
@@ -23,19 +24,21 @@ def gsd(a, b):
   # 大小が逆転している場合
   if(b > a):
     # 反転してやり直す
-    return gsd(b, a)
+    return gcd(b, a)
 
   # 除算の余りを算出
-  div = a / b
   mod = a % b
 
   # 再起呼び出し
-  return gsd(b, mod)
+  return gcd(b, mod)
 
 # コマンドライン呼び出し
 if __name__ == "__main__":
   args = sys.argv
-  if(len(args)) < 2:
-    print('input error: Not enough input arguments.')
-  else:
-    print('gsd:', gsd(int(args[1]), int(args[2])))
+  a = random.randrange(2, 1000)
+  b = random.randrange(2, 1000)
+  if(len(args)) > 2:
+    a = int(args[1])
+    b = int(args[2])
+
+  print(f'a:{a} b:{b} gcd:{gcd(a, b)}')
